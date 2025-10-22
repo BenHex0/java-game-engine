@@ -1,4 +1,8 @@
+package engine;
+
 import java.util.ArrayList;
+import entities.Entity;
+import entities.Player;
 
 public class Engine implements Runnable {
 
@@ -9,7 +13,7 @@ public class Engine implements Runnable {
     Player player = new Player();
     Thread gameThread;
 
-    Engine() {
+    public Engine() {
         entities = new ArrayList<>();
         entities.add(player);
         renderer.addObjects(entities);

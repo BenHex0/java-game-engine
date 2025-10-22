@@ -1,8 +1,11 @@
+package graphics;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
+
 
 public class Sprite implements Drawable {
     private BufferedImage image;

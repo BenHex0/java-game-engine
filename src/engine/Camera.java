@@ -1,3 +1,7 @@
+package engine;
+
+import entities.Entity;
+
 public class Camera {
     public int x, y; // top-left position in the world
     public double zoom = 1.0; // optional, for scaling

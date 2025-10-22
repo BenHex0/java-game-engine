@@ -1,8 +1,15 @@
+package entities;
+
+import engine.Camera;
+import engine.InputHandler;
+import engine.Position;
+import graphics.Sprite;
+
 public abstract class Entity {
-    Position position;
-    Sprite sprite;
-    InputHandler input;
-    Camera camera;
+    public Position position;
+    public Sprite sprite;
+    public InputHandler input;
+    public Camera camera;
 
     Entity() {
         position = new Position();

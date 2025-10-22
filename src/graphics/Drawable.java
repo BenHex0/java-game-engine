@@ -1,4 +1,5 @@
-import java.awt.*;
+package graphics;
+import java.awt.Graphics2D;
 
 public interface Drawable {
     // Method every drawable object must implement

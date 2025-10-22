@@ -1,3 +1,8 @@
+package entities;
+
+import engine.InputHandler;
+import graphics.Sprite;
+
 public class Player extends Entity {
     int speed;
     Sprite sprite;

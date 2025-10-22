@@ -1,11 +1,16 @@
+package engine;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.awt.Graphics2D;
+import entities.Entity;
+
 
 public class Renderer extends JPanel {
     // screen settings
     final double aspectRatio = 16.0 / 9.0;
-    final int screenWidth = 1920;
+    final int screenWidth = 1280;
     final int screenHeight = (int) (screenWidth / aspectRatio);
     final int scale = 3;
 

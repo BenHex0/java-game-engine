@@ -1,3 +1,5 @@
+package engine;
+
 public class Position {
-    int x, y;
+    public int x, y;
 }
