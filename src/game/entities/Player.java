@@ -76,6 +76,7 @@ public class Player extends Entity {
 
     @Override
     public void render(Renderer renderer) {
+        renderer.camera.cameraTarget(x, y, sprite.getWidth(), sprite.getHeight());
         int drawX = (int) Math.round(x - renderer.camera.getxOffset());
         int drawY = (int) Math.round(y - renderer.camera.getyOffset());
         renderer.renderSprite(drawX, drawY, sprite, false);
