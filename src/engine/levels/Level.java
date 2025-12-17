@@ -1,13 +1,12 @@
 package engine.levels;
 
+import java.util.List;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
 
-import engine.entities.Enemy;
 import engine.entities.Entity;
-import engine.entities.Player;
 import engine.graphics.*;
 import engine.input.InputHandler;
 import engine.levels.tiles.*;
@@ -17,11 +16,10 @@ public class Level {
     protected int[] tilesInt;
     protected int[] tiles;
 
-    InputHandler input;
+    protected InputHandler input;
 
     // entities
-    Player player;
-    Enemy enemy;
+    public List<Entity> entities = new ArrayList<Entity>();
 
     public Level(int width, int height, InputHandler input) {
         this.width = width;
@@ -58,18 +56,29 @@ public class Level {
         }
     }
 
+    // override it
+    public void currentLevelUpdate() {
+    }
+
     public void update() {
-        enemy.update();
+        for (Entity e : entities) {
+            e.update();
+        }
+
+       currentLevelUpdate();
     }
 
     public void render(Renderer renderer) {
         renderTileMap(renderer);
-        enemy.render(renderer);
+
+        for (Entity e : entities) {
+            e.render(renderer);
+        }
     }
 
     private void renderTileMap(Renderer renderer) {
-        int camX = (int)renderer.camera.getxOffset();
-        int camY = (int)renderer.camera.getyOffset();
+        int camX = (int) renderer.camera.getxOffset();
+        int camY = (int) renderer.camera.getyOffset();
 
         int x0 = camX >> 4;
         int y0 = camY >> 4;
@@ -88,18 +97,14 @@ public class Level {
         }
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     public void add(Entity e) {
         e.init(this);
-        if (e instanceof Player) {
-            player = (Player) e;
-        } else if (e instanceof Enemy) {
-            enemy = (Enemy) e;
-        }
+        entities.add(e);
     }
+
+    // public void addCurrentLevel(Level level) {
+    //     this.currentLevel = level;
+    // }
 
     // grass0 = green => 0xff1CC809
     // grass1 = green + yello => 0xffF4E80B

@@ -43,6 +43,7 @@ public class SpwanLevel extends Level {
         enemy = new Enemy(10, 10);
         add(player);
         add(enemy);
+        enemy.target(player);
     }
 
     @Override

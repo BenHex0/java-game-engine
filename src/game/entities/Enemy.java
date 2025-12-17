@@ -5,12 +5,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import engine.levels.Level;
 import engine.entities.Entity;
 import engine.graphics.Renderer;
 import engine.graphics.Sprite;
 import engine.levels.tiles.Node;
 import engine.levels.tiles.Tile;
 import engine.utilities.Vector2i;
+import game.levels.SpwanLevel;
 
 public class Enemy extends Entity {
     private int xAxis, yAxis;
@@ -21,6 +23,7 @@ public class Enemy extends Entity {
     private int nextPos;
     private double speed = 2.5;
     private int time = 0;
+    private Level level;
 
     private List<Vector2i> debugPath = new ArrayList<Vector2i>();
 
@@ -43,6 +46,11 @@ public class Enemy extends Entity {
                 debugPath.add(new Vector2i(x, y));
             }
         }
+    }
+
+
+    public void target(Entity target) {
+        this.target = target;
     }
 
     int X;
@@ -194,7 +202,7 @@ public class Enemy extends Entity {
                 int yi = (i / 3) - 1; // Neighbor Y offset
 
                 Vector2i neighborCoords = new Vector2i(currentX + xi, currentY + yi);
-
+                
                 Tile at = level.getTile(neighborCoords.getX(), neighborCoords.getY());
 
                 if (at == null || at.solid() || at == Tile.voidTile)

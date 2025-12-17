@@ -4,13 +4,11 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
-
-import engine.entities.Enemy;
-import engine.entities.Player;
 import engine.graphics.Renderer;
 import engine.input.InputHandler;
 import engine.levels.*;
 import engine.ui.UI;
+import game.levels.SpwanLevel;
 
 public class Engine extends Canvas implements Runnable {
 
@@ -27,32 +25,29 @@ public class Engine extends Canvas implements Runnable {
     // modules
     private InputHandler inputHandler;
     private Renderer renderer;
-    private Level level;
+    private Level currentLevel;
     private UI ui;
+
+    // Levels
+    SpwanLevel spwanLevel;
 
     // GAME STATE
     public int gameState = 1;
     public final int gameState2 = 2;
 
-    // testing
-    Player player;
-    Enemy enemy;
 
     public Engine() {
         Dimension size = new Dimension(screenWidth * scale, screenHeight * scale);
         setPreferredSize(size);
         window = new JFrame();
-        renderer = new Renderer(screenWidth, screenHeight);
-        level = new Level(80, 80, inputHandler);
         inputHandler = new InputHandler();
-        ui = new UI(screenWidth, screenHeight);
         addKeyListener(inputHandler);
+        renderer = new Renderer(screenWidth, screenHeight);
 
-        player = new Player(30, 30, inputHandler);
-        enemy = new Enemy(30, 10);
+        ui = new UI(screenWidth, screenHeight);
 
-        level.add(player);
-        level.add(enemy);
+        spwanLevel = new SpwanLevel(80, 80, inputHandler);
+        currentLevel = spwanLevel;
     }
 
     public synchronized void start() {
@@ -104,11 +99,10 @@ public class Engine extends Canvas implements Runnable {
         }
     }
 
+
     public void update() {
-        // inputHandler.update();
-        level.update();
-        player.update();
-        // renderer.camera.cameraTarget(player.getX(), player.getY(), player.getSprite().getWidth(), player.getSprite().getHeight());
+        currentLevel.update();
+
         // if (inputHandler.isKeyPressed(Key.DOWN)) {
         // gameState = 2;
         // } else if (inputHandler.isKeyPressed(Key.UP)) {
@@ -126,10 +120,8 @@ public class Engine extends Canvas implements Runnable {
 
         if (gameState == 1) {
             renderer.clear();
-            double xScroll = player.getX() - screenWidth / 2;
-            double yScroll = player.getY() - screenHeight / 2;
-            level.render((int)xScroll, (int)yScroll, renderer);
-            player.render(renderer);
+
+            currentLevel.render(renderer);
 
             g.setColor(Color.BLACK);
             g.fillRect(0, 0, getWidth(), getHeight());

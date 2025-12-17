@@ -5,6 +5,7 @@ import engine.graphics.Sprite;
 import engine.levels.Level;
 import engine.utilities.Vector2i;
 
+
 public abstract class Entity {
     // position in pixels
     protected double x, y;
