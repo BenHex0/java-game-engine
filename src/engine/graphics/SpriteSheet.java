@@ -10,7 +10,12 @@ public class SpriteSheet {
     public final int HEIGHT;
     public int[] pixels;
 
-    public static SpriteSheet playerSheet = new SpriteSheet("assets/player/boy_up_1.png", 16, 16);
+    // Player
+    /////////////////////////////////////////////////////////////
+    public static SpriteSheet playerIdleSheet = new SpriteSheet("assets/player/idle/PlayerSheet.png", 32, 64);
+    // public static SpriteSheet playerIdleSheet = new SpriteSheet("assets/player/idle/PlayerSheet.png", 32, 64);
+
+    
     public static SpriteSheet tiles = new SpriteSheet("assets/world/Tilemap_color1.png", 576, 384);
   
     private Sprite sprites[];

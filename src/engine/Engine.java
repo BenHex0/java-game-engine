@@ -2,13 +2,21 @@ package engine;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+
 import javax.swing.JFrame;
+
+import engine.entities.Enemy;
+import engine.entities.Player;
+import engine.graphics.Renderer;
+import engine.input.InputHandler;
+import engine.levels.*;
+import engine.ui.UI;
 
 public class Engine extends Canvas implements Runnable {
 
     // screen settings
     final double aspectRatio = 16.0 / 9.0;
-    final int screenWidth = 300;
+    final int screenWidth = 500;
     final int screenHeight = (int) (screenWidth / aspectRatio);
     final int scale = 3;
 
@@ -16,10 +24,35 @@ public class Engine extends Canvas implements Runnable {
     JFrame window;
     private boolean running = false;
 
+    // modules
+    private InputHandler inputHandler;
+    private Renderer renderer;
+    private Level level;
+    private UI ui;
+
+    // GAME STATE
+    public int gameState = 1;
+    public final int gameState2 = 2;
+
+    // testing
+    Player player;
+    Enemy enemy;
+
     public Engine() {
         Dimension size = new Dimension(screenWidth * scale, screenHeight * scale);
         setPreferredSize(size);
         window = new JFrame();
+        renderer = new Renderer(screenWidth, screenHeight);
+        level = new Level(80, 80, inputHandler);
+        inputHandler = new InputHandler();
+        ui = new UI(screenWidth, screenHeight);
+        addKeyListener(inputHandler);
+
+        player = new Player(30, 30, inputHandler);
+        enemy = new Enemy(30, 10);
+
+        level.add(player);
+        level.add(enemy);
     }
 
     public synchronized void start() {
@@ -63,7 +96,7 @@ public class Engine extends Canvas implements Runnable {
             frames++;
 
             if (System.currentTimeMillis() - timer > 1000) {
-                window.setTitle(updates + " ups, " + frames + " FPS");
+                window.setTitle("ups " + updates + ", " + frames + " FPS");
                 timer += 1000;
                 updates = 0;
                 frames = 0;
@@ -72,21 +105,46 @@ public class Engine extends Canvas implements Runnable {
     }
 
     public void update() {
-
+        // inputHandler.update();
+        level.update();
+        player.update();
+        // renderer.camera.cameraTarget(player.getX(), player.getY(), player.getSprite().getWidth(), player.getSprite().getHeight());
+        // if (inputHandler.isKeyPressed(Key.DOWN)) {
+        // gameState = 2;
+        // } else if (inputHandler.isKeyPressed(Key.UP)) {
+        // gameState = 1;
+        // }
     }
 
     public void render() {
         BufferStrategy bs = getBufferStrategy();
         if (bs == null) {
-            createBufferStrategy(3);
+            createBufferStrategy(2);
             return;
         }
-
         Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, getWidth(), getHeight());
-        g.dispose();
-        bs.show();
+
+        if (gameState == 1) {
+            renderer.clear();
+            double xScroll = player.getX() - screenWidth / 2;
+            double yScroll = player.getY() - screenHeight / 2;
+            level.render((int)xScroll, (int)yScroll, renderer);
+            player.render(renderer);
+
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, getWidth(), getHeight());
+            g.drawImage(renderer.frame, 0, 0, screenWidth * scale, screenHeight * scale, null);
+            g.dispose();
+            bs.show();
+        }
+
+        if (gameState == 2) {
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, getWidth(), getHeight());
+            ui.render(g);
+            g.dispose();
+            bs.show();
+        }
     }
 
     public void startGame() {

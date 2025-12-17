@@ -1,6 +1,6 @@
 package engine.graphics;
 
-import engine.utilities.Position;
+import engine.utilities.Vector2i;
 
 public class Camera {
     private double xOffset, yOffset;
@@ -19,8 +19,13 @@ public class Camera {
         return (int) Math.round(yOffset);
     }
 
-    public void cameraTarget(Position target, int width, int height) {
-        xOffset = target.x - screenWidth / 2 + width / 2;
-        yOffset = target.y - screenHeight / 2 + height / 2;
+    public void setOffset(int xOffset, int yOffset) {
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
+    }
+
+    public void cameraTarget(double x, double y, int width, int height) {
+        xOffset = x - screenWidth / 2 + width / 2;
+        yOffset = y - screenHeight / 2 + height / 2;
     }
 }

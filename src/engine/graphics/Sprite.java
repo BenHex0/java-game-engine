@@ -1,13 +1,17 @@
 package engine.graphics;
 
+import engine.utilities.Vector2i;
+
 public class Sprite {
     private int x, y;
     private int width, height;
     public final int SIZE;
     public int pixels[];
     public SpriteSheet sheet;
+    public Vector2i spritPivot;
 
-    public static Sprite player = new Sprite(16, 0, 0, SpriteSheet.playerSheet);
+    public static Sprite player = new Sprite(16, 16, 0, 0, SpriteSheet.playerIdleSheet);
+    // public static Sprite player = new Sprite(16, 16, 0, 0, SpriteSheet.playerIdleSheet);
 
     public static Sprite voidSprite = new Sprite(16, 16, 0X2784F5);
 
@@ -78,12 +82,27 @@ public class Sprite {
         load();
     }
 
+    public Sprite(int width, int  height, int x, int y, SpriteSheet sheet) {
+        SIZE = width * height;
+        this.width = width;
+        this.height = height;
+        pixels = new int[width * height];
+        this.sheet = sheet;
+        this.x = x * SIZE;
+        this.y = y * SIZE;
+        load();
+    }
+
     public int getWidth() {
         return width;
     }
 
     public int getHeight() {
         return height;
+    }
+
+    public Vector2i getSpritPivot() {
+        return new Vector2i(width / 2, height / 2);
     }
 
     private void load() {

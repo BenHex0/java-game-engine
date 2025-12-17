@@ -5,17 +5,29 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import engine.entities.Enemy;
+import engine.entities.Entity;
+import engine.entities.Player;
 import engine.graphics.*;
+import engine.input.InputHandler;
 import engine.levels.tiles.*;
+
 
 public class Level {
     protected int width, height;
     protected int[] tilesInt;
     protected int[] tiles;
 
-    public Level(int width, int height) {
+    InputHandler input;
+
+    // entities
+    Player player;
+    Enemy enemy;
+
+    public Level(int width, int height, InputHandler input) {
         this.width = width;
         this.height = height;
+        this.input = input;
         tilesInt = new int[width * height];
         tiles = new int[width * height];
         generateLevel();
@@ -35,7 +47,7 @@ public class Level {
     }
 
     protected void loadLevel(String path) {
-         try {
+        try {
             java.io.File file = new java.io.File(path);
             BufferedImage image = ImageIO.read(file);
             width = image.getWidth();
@@ -48,45 +60,22 @@ public class Level {
     }
 
     public void update() {
-
+        enemy.update();
     }
 
     public void render(int xScroll, int yScroll, Renderer renderer) {
-        int tileSize = 16;
-        renderer.setOffset(xScroll, yScroll);
-        // System.out.println("X: " + xScroll + " Y:" + yScroll);
+        renderTileMap(xScroll, yScroll, renderer);
+        enemy.render(renderer);
+    }
 
-        // FIX FOR X0 and Y0:
-        // Integer division xScroll / tileSize correctly finds the index of the tile
-        // that the camera is currently looking at. However, if the scroll is
-        // positive (e.g., 17) and not a multiple of 16, we missed the tile at index 0.
+    private void renderTileMap(int xScroll, int yScroll, Renderer renderer) {
+        renderer.camera.setOffset(xScroll, yScroll);
 
-        // We want to ensure we draw the first visible tile, even if it's partially
-        // off-screen (left/top).
-        // The calculation xScroll / tileSize already works for this if xScroll > 0.
-        int x0 = xScroll >> tileSize;
-        int y0 = yScroll >> tileSize;
+        int x0 = renderer.camera.getxOffset() >> 4;
+        int x1 = (renderer.camera.getxOffset() + renderer.screenWidth + 16) >> 4;
+        int y0 = renderer.camera.getyOffset() >> 4;
+        int y1 = (renderer.camera.getyOffset() + renderer.screenHeight + 16) >> 4;
 
-        // Use a modulus check to see if we need to adjust, but since xScroll is always
-        // positive
-        // and represents the offset, the division usually handles the visible tile
-        // correctly.
-        // However, the *real* problem usually occurs when xScroll is not exactly 0.
-
-        // The standard *safe* approach for positive offsets is:
-        // For x0, simply start at the index the offset is currently at.
-
-        // For x1 and y1, you need the ceiling function to ensure the last partial tile
-        // is included.
-        // The '+ tileSize' in the numerator achieves the ceiling effect for integer
-        // division.
-        int x1 = (xScroll + renderer.screenWidth + tileSize - 1) / tileSize;
-        int y1 = (yScroll + renderer.screenHeight + tileSize - 1) / tileSize;
-
-        // The most common and robust way to guarantee the first partially visible tile
-        // is:
-
-        // Ensure the loop is clamped by the level boundaries
         if (x0 < 0)
             x0 = 0;
         if (y0 < 0)
@@ -96,13 +85,24 @@ public class Level {
         if (y1 > height)
             y1 = height;
 
-        // ... rest of the loop remains the same ...
         for (int y = y0; y < y1; y++) {
             for (int x = x0; x < x1; x++) {
-                // NOTE: The tile.render method must now convert (x, y) index back to pixel
-                // position
                 getTile(x, y).render(x, y, renderer);
             }
+        }
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void add(Entity e) {
+        e.init(this);
+        if (e instanceof Player) {
+            player = (Player) e;
+        }
+        else if (e instanceof Enemy) {
+            enemy = (Enemy) e;
         }
     }
 

@@ -3,7 +3,8 @@ package tilemap;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import graphics.Tile;
+
+import engine.graphics.Tile;
 
 // public class TileMap {
 //     private Tile[] tiles;

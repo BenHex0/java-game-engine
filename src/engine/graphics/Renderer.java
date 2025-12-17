@@ -3,13 +3,13 @@ package engine.graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import engine.levels.tiles.*;
+
 public class Renderer {
     public int screenWidth, screenHeight;
     public int[] screenBuffer;
-    public int xOffset, yOffset;
     public BufferedImage frame;
-
-
+    public Camera camera;
 
     public Renderer(int width, int height) {
         this.screenWidth = width;
@@ -17,6 +17,7 @@ public class Renderer {
         screenBuffer = new int[width * height];
         frame = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_RGB);
         screenBuffer = ((DataBufferInt) frame.getRaster().getDataBuffer()).getData();
+        camera = new Camera(width, height);
     }
 
     public void clear() {
@@ -25,30 +26,55 @@ public class Renderer {
         }
     }
 
-    
     public void renderSprite(int xPosition, int yPosition, Sprite sprite, boolean fixed) {
         if (fixed) {
-            xPosition -= xOffset;
-            yPosition -= yOffset;
+            xPosition -= camera.getxOffset();
+            yPosition -= camera.getyOffset();
         }
 
-        for (int y = 0; y < sprite.getHeight(); y++) {
+        for (int y = 0; y < 16; y++) {
             int yAbsolute = y + yPosition;
-            for (int x = 0; x < sprite.getWidth(); x++) {
+            for (int x = 0; x < 16; x++) {
                 int xAbsolute = x + xPosition;
-                if (xAbsolute < 0 || xAbsolute >= screenWidth || yAbsolute < 0 || yAbsolute >= screenHeight)
-                    continue;
-                screenBuffer[x + y * screenWidth] = sprite.pixels[x + y * sprite.getWidth()];
+
+                if (xAbsolute < -83 || xAbsolute >= screenWidth || yAbsolute < 0
+                        || yAbsolute >= screenHeight)
+                    break;
+                if (xAbsolute < 0)
+                    xAbsolute = 0;
+                int col = sprite.pixels[x + y * 16];
+                if (col != 0x00000000)
+                    screenBuffer[xAbsolute + yAbsolute * screenWidth] = col;
+
             }
         }
-
     }
 
+    public void renderTile(int xPosition, int yPosition, Tile tile) {
+        xPosition -= camera.getxOffset();
+        yPosition -= camera.getyOffset();
+        // System.out.println("X Offset: " + xOffset + " Y Offset:" + yOffset);
+        for (int y = 0; y < tile.sprite.SIZE; y++) {
+            int yAbsolute = y + yPosition;
+            for (int x = 0; x < tile.sprite.SIZE; x++) {
+                int xAbsolute = x + xPosition;
+
+                if (xAbsolute < -tile.sprite.SIZE || xAbsolute >= screenWidth || yAbsolute < 0
+                        || yAbsolute >= screenHeight)
+                    break;
+                if (xAbsolute < 0)
+                    xAbsolute = 0;
+
+                screenBuffer[xAbsolute + yAbsolute * screenWidth] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+
+            }
+        }
+    }
 
     public void drawRect(int xp, int yp, int width, int height, int color, boolean fixed) {
         if (fixed) {
-            xp -= xOffset;
-            yp -= yOffset;
+            xp -= camera.getxOffset();
+            yp -= camera.getyOffset();
         }
 
         for (int x = xp; x < xp + width; x++) {
@@ -74,4 +100,11 @@ public class Renderer {
         }
     }
 
+    public void renderPixel(int x, int y, int color) {
+        x -= camera.getxOffset();
+        y -= camera.getyOffset();
+
+        if ((x > 0 && y > 0) && (x < screenWidth && y < screenHeight))
+            screenBuffer[x + y * screenWidth] = color;
+    }
 }
