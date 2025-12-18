@@ -129,7 +129,7 @@ public class Level {
             return Tile.grassFlat;
         if (tiles[x + y * worldWidth] == 0xff5d9556)
             return Tile.grassDetail;
-        if (tiles[x + y * worldWidth] == 0xff5d9556)
+        if (tiles[x + y * worldWidth] == 0xff4e7e86)
             return Tile.grassWaterLeft;
         if (tiles[x + y * worldWidth] == 0xff387882)
             return Tile.grassWaterRight;
