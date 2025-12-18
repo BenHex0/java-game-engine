@@ -10,12 +10,13 @@ public class Sprite {
     public SpriteSheet sheet;
     public Vector2i spritPivot;
 
-    public static Sprite player = new Sprite(16, 16, 0, 0, SpriteSheet.playerIdleSheet);
-    // public static Sprite player = new Sprite(16, 16, 0, 0, SpriteSheet.playerIdleSheet);
+    public static Sprite player = new Sprite(16, 16, 0, 1, SpriteSheet.playerSheet);
+    // public static Sprite player = new Sprite(16, 16, 0, 0,
+    // SpriteSheet.playerIdleSheet);
 
     public static Sprite voidSprite = new Sprite(16, 16, 0X2784F5);
 
-    //world tiles
+    // world tiles
     ////////////////////////////////////////////////////////////////////////////////////////
     public static Sprite grass0 = new Sprite(16, 4, 4, SpriteSheet.tiles);
     public static Sprite grass1 = new Sprite(16, 5, 4, SpriteSheet.tiles);
@@ -27,26 +28,26 @@ public class Sprite {
     public static Sprite grass7 = new Sprite(16, 5, 6, SpriteSheet.tiles);
     public static Sprite grass8 = new Sprite(16, 6, 6, SpriteSheet.tiles);
     ////////////////////////////////////////////////////////////////////////////////////////
-    
-    //world edge tiles
+
+    // world edge tiles
     ////////////////////////////////////////////////////////////////////////////////////////
     public static Sprite upEdge0 = new Sprite(16, 1, 0, SpriteSheet.tiles);
     public static Sprite upEdge1 = new Sprite(16, 2, 0, SpriteSheet.tiles);
     public static Sprite upEdge2 = new Sprite(16, 3, 0, SpriteSheet.tiles);
     public static Sprite upEdge3 = new Sprite(16, 4, 0, SpriteSheet.tiles);
     public static Sprite upEdge4 = new Sprite(16, 5, 0, SpriteSheet.tiles);
+
     // public static Sprite edge5 = new Sprite(16, 6, 5, SpriteSheet.tiles);
     // public static Sprite edge6 = new Sprite(16, 4, 6, SpriteSheet.tiles);
     // public static Sprite edge7 = new Sprite(16, 5, 6, SpriteSheet.tiles);
     // public static Sprite edge8 = new Sprite(16, 6, 6, SpriteSheet.tiles);
     ////////////////////////////////////////////////////////////////////////////////////////
 
-
     protected Sprite(SpriteSheet sheet, int width, int height) {
         if (width == height)
             SIZE = width;
         else
-        SIZE = -1;
+            SIZE = -1;
         this.width = width;
         this.height = height;
         this.sheet = sheet;
@@ -82,14 +83,14 @@ public class Sprite {
         load();
     }
 
-    public Sprite(int width, int  height, int x, int y, SpriteSheet sheet) {
+    public Sprite(int width, int height, int x, int y, SpriteSheet sheet) {
         SIZE = width * height;
         this.width = width;
         this.height = height;
         pixels = new int[width * height];
         this.sheet = sheet;
-        this.x = x * SIZE;
-        this.y = y * SIZE;
+        this.x = x * width;
+        this.y = y * height;
         load();
     }
 
