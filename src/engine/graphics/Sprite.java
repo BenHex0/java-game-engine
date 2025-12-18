@@ -29,8 +29,8 @@ public class Sprite {
     // Water edge
     public static Sprite grassWaterLeft = new Sprite(16, 16, 0, 4, SpriteSheet.tiles);
     public static Sprite grassWaterRight = new Sprite(16, 16, 1, 4, SpriteSheet.tiles);
-    public static Sprite grassWaterUp = new Sprite(16, 16, 2, 4, SpriteSheet.tiles);
-    public static Sprite grassWaterDown = new Sprite(16, 16, 3, 4, SpriteSheet.tiles);
+    public static Sprite grassWaterUp = new Sprite(16, 16, 3, 4, SpriteSheet.tiles);
+    public static Sprite grassWaterDown = new Sprite(16, 16, 2, 4, SpriteSheet.tiles);
     public static Sprite grassWaterUpLeft = new Sprite(16, 16, 4, 4, SpriteSheet.tiles);
     public static Sprite grassWaterUpRight = new Sprite(16, 16, 5, 4, SpriteSheet.tiles);
     public static Sprite grassWaterDownLeft = new Sprite(16, 16, 6, 4, SpriteSheet.tiles);
