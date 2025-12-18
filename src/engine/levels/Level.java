@@ -104,9 +104,11 @@ public class Level {
         entities.add(e);
     }
 
-    // public void addCurrentLevel(Level level) {
-    // this.currentLevel = level;
-    // }
+    public void deleteAllEntities() {
+        entities.clear();
+    }
+
+ 
 
     // grass0 = green => 0xff1CC809
     // grass1 = green + yello => 0xffF4E80B
