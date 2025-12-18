@@ -30,7 +30,7 @@ public class SpwanLevel extends Level {
     void start() {
         TileCoordinate playerPosition = new TileCoordinate(10, 10);
         player = new Player(playerPosition.x(), playerPosition.y(), input);
-        TileCoordinate enemyPosition = new TileCoordinate(1, 1);
+        TileCoordinate enemyPosition = new TileCoordinate(5, 5);
         enemy = new Enemy(enemyPosition.x(), enemyPosition.y());
         database = new Database();
         add(player);
