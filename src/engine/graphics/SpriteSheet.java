@@ -16,7 +16,8 @@ public class SpriteSheet {
     // public static SpriteSheet playerIdleSheet = new SpriteSheet("assets/player/idle/PlayerSheet.png", 32, 64);
 
     
-    public static SpriteSheet tiles = new SpriteSheet("assets/world/Tilemap_color1.png", 576, 384);
+    // public static SpriteSheet tiles = new SpriteSheet("assets/world/Tilemap_color1.png", 576, 384);
+    public static SpriteSheet tiles = new SpriteSheet("assets/world/Tilemap.png", 192, 160);
   
     private Sprite sprites[];
 

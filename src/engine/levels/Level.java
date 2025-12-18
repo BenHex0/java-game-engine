@@ -111,29 +111,48 @@ public class Level {
     // grass1 = green + yello => 0xffF4E80B
     // tree = brown => 0xff703405
 
-    Tile[] grassTiles = {
-            Tile.grass0,
-            Tile.grass1,
-            Tile.grass2,
-            Tile.grass3,
-            Tile.grass4,
-            Tile.grass5,
-            Tile.grass6,
-            Tile.grass7,
-            Tile.grass8
-    };
 
     public Tile getTile(int x, int y) {
         if (x < 0 || y < 0 || x >= worldWidth || y >= worldHeight)
             return Tile.voidTile;
-        if (tiles[x + y * worldWidth] == 0)
+        if (tiles[x + y * worldWidth] == 0xff0000)
+            return Tile.hut;
+        if (tiles[x + y * worldWidth] == 0x2784f5)
+            return Tile.water0;
+        if (tiles[x + y * worldWidth] == 0x6fb2e1)
+            return Tile.water1;
+        if (tiles[x + y * worldWidth] == 0x362920)
+            return Tile.tree0;
+        if (tiles[x + y * worldWidth] == 0x56483d)
+            return Tile.tree1;
+        if (tiles[x + y * worldWidth] == 0x67a55e)
+            return Tile.grassFlat;
+        if (tiles[x + y * worldWidth] == 0x5d9556)
+            return Tile.grassDetail;
+        if (tiles[x + y * worldWidth] == 0x5d9556)
+            return Tile.grassWaterLeft;
+        if (tiles[x + y * worldWidth] == 0x387882)
+            return Tile.grassWaterRight;
+        if (tiles[x + y * worldWidth] == 0x50a0ad)
+            return Tile.grassWaterUp;
+        if (tiles[x + y * worldWidth] == 0x3e6268)
+            return Tile.grassWaterDown;
+        if (tiles[x + y * worldWidth] == 0x99c2bd)
+            return Tile.grassWaterUpLeft;
+        if (tiles[x + y * worldWidth] == 0x38beac)
+            return Tile.grassWaterUpRight;
+        if (tiles[x + y * worldWidth] == 0x7d8f8c)
+            return Tile.grassWaterDownLeft;
+        if (tiles[x + y * worldWidth] == 0x102b27)
+            return Tile.grassWaterDownRight;
+        /*if (tiles[x + y * worldWidth] == 0)
             return Tile.grass0;
         if (tiles[x + y * worldWidth] == 0xff1CC809)
             return Tile.grass0;
         if (tiles[x + y * worldWidth] == 0xffF4E80B)
             return Tile.grass1;
         if (tiles[x + y * worldWidth] == 0xff703405)
-            return Tile.grass1;
+            return Tile.grass1;*/
         return Tile.voidTile;
     }
 }
