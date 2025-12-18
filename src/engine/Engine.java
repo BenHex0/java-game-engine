@@ -1,14 +1,13 @@
 package engine;
 
-import java.awt.*;
-import java.awt.image.BufferStrategy;
-
-import javax.swing.JFrame;
 import engine.graphics.Renderer;
 import engine.input.InputHandler;
 import engine.levels.*;
 import engine.ui.UI;
 import game.levels.SpwanLevel;
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+import javax.swing.JFrame;
 
 public class Engine extends Canvas implements Runnable {
 
@@ -46,7 +45,7 @@ public class Engine extends Canvas implements Runnable {
 
         ui = new UI(screenWidth, screenHeight);
 
-        spwanLevel = new SpwanLevel("assets/world/Map.png", inputHandler);
+        spwanLevel = new SpwanLevel("assets/world/MapWaterEdge.png", inputHandler);
         currentLevel = spwanLevel;
     }
 
