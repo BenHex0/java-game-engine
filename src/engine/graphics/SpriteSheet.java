@@ -12,13 +12,14 @@ public class SpriteSheet {
 
     // Player
     /////////////////////////////////////////////////////////////
-    public static SpriteSheet playerIdleSheet = new SpriteSheet("assets/player/idle/PlayerSheet.png", 32, 64);
-    // public static SpriteSheet playerIdleSheet = new SpriteSheet("assets/player/idle/PlayerSheet.png", 32, 64);
+    public static SpriteSheet playerSheet = new SpriteSheet("assets/player/idle/PlayerSheet.png", 32, 64);
+    public static SpriteSheet playerAnimDown = new SpriteSheet(playerSheet, 0, 0, 2, 1, 16);
+    // public static SpriteSheet playerIdleSheet = new
+    // SpriteSheet("assets/player/idle/PlayerSheet.png", 32, 64);
 
-    
     // public static SpriteSheet tiles = new SpriteSheet("assets/world/Tilemap_color1.png", 576, 384);
     public static SpriteSheet tiles = new SpriteSheet("assets/world/Tilemap.png", 192, 160);
-  
+
     private Sprite sprites[];
 
     public SpriteSheet(String path, int size) {

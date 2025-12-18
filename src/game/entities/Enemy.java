@@ -5,14 +5,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import engine.levels.Level;
 import engine.entities.Entity;
 import engine.graphics.Renderer;
 import engine.graphics.Sprite;
-import engine.levels.tiles.Node;
 import engine.levels.tiles.Tile;
+import engine.utilities.Node;
 import engine.utilities.Vector2i;
-import game.levels.SpwanLevel;
+
 
 public class Enemy extends Entity {
     private int xAxis, yAxis;
@@ -23,7 +22,6 @@ public class Enemy extends Entity {
     private int nextPos;
     private double speed = 2.5;
     private int time = 0;
-    // private Level level;
 
     private List<Vector2i> debugPath = new ArrayList<Vector2i>();
 

@@ -58,8 +58,7 @@ public class Level {
     }
 
     // override it
-    public void currentLevelUpdate() {
-    }
+    public void currentLevelUpdate() {}
 
     public void update() {
         for (Entity e : entities) {
@@ -91,6 +90,8 @@ public class Level {
         x1 = Math.min(worldWidth, x1);
         y1 = Math.min(worldHeight, y1);
 
+        // System.out.println(x1 + " " + y1);
+
         for (int y = y0; y < y1; y++) {
             for (int x = x0; x < x1; x++) {
                 getTile(x, y).render(x, y, renderer);
@@ -111,48 +112,39 @@ public class Level {
     // grass1 = green + yello => 0xffF4E80B
     // tree = brown => 0xff703405
 
-
     public Tile getTile(int x, int y) {
         if (x < 0 || y < 0 || x >= worldWidth || y >= worldHeight)
             return Tile.voidTile;
-        if (tiles[x + y * worldWidth] == 0xff0000)
+        if (tiles[x + y * worldWidth] == 0xffff0000)
             return Tile.hut;
-        if (tiles[x + y * worldWidth] == 0x2784f5)
+        if (tiles[x + y * worldWidth] == 0xff2784f5)
             return Tile.water0;
-        if (tiles[x + y * worldWidth] == 0x6fb2e1)
+        if (tiles[x + y * worldWidth] == 0xff6fb2e1)
             return Tile.water1;
-        if (tiles[x + y * worldWidth] == 0x362920)
+        if (tiles[x + y * worldWidth] == 0xff362920)
             return Tile.tree0;
-        if (tiles[x + y * worldWidth] == 0x56483d)
+        if (tiles[x + y * worldWidth] == 0xff56483d)
             return Tile.tree1;
-        if (tiles[x + y * worldWidth] == 0x67a55e)
+        if (tiles[x + y * worldWidth] == 0xff67a55e)
             return Tile.grassFlat;
-        if (tiles[x + y * worldWidth] == 0x5d9556)
+        if (tiles[x + y * worldWidth] == 0xff5d9556)
             return Tile.grassDetail;
-        if (tiles[x + y * worldWidth] == 0x5d9556)
+        if (tiles[x + y * worldWidth] == 0xff5d9556)
             return Tile.grassWaterLeft;
-        if (tiles[x + y * worldWidth] == 0x387882)
+        if (tiles[x + y * worldWidth] == 0xff387882)
             return Tile.grassWaterRight;
-        if (tiles[x + y * worldWidth] == 0x50a0ad)
+        if (tiles[x + y * worldWidth] == 0xff50a0ad)
             return Tile.grassWaterUp;
-        if (tiles[x + y * worldWidth] == 0x3e6268)
+        if (tiles[x + y * worldWidth] == 0xff3e6268)
             return Tile.grassWaterDown;
-        if (tiles[x + y * worldWidth] == 0x99c2bd)
+        if (tiles[x + y * worldWidth] == 0xff99c2bd)
             return Tile.grassWaterUpLeft;
-        if (tiles[x + y * worldWidth] == 0x38beac)
+        if (tiles[x + y * worldWidth] == 0xff38beac)
             return Tile.grassWaterUpRight;
-        if (tiles[x + y * worldWidth] == 0x7d8f8c)
+        if (tiles[x + y * worldWidth] == 0xff7d8f8c)
             return Tile.grassWaterDownLeft;
-        if (tiles[x + y * worldWidth] == 0x102b27)
+        if (tiles[x + y * worldWidth] == 0xff102b27)
             return Tile.grassWaterDownRight;
-        /*if (tiles[x + y * worldWidth] == 0)
-            return Tile.grass0;
-        if (tiles[x + y * worldWidth] == 0xff1CC809)
-            return Tile.grass0;
-        if (tiles[x + y * worldWidth] == 0xffF4E80B)
-            return Tile.grass1;
-        if (tiles[x + y * worldWidth] == 0xff703405)
-            return Tile.grass1;*/
         return Tile.voidTile;
     }
 }

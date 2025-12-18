@@ -32,17 +32,17 @@ public class Renderer {
             yPosition -= camera.getyOffset();
         }
 
-        for (int y = 0; y < 16; y++) {
+        for (int y = 0; y < sprite.getHeight(); y++) {
             int yAbsolute = y + yPosition;
-            for (int x = 0; x < 16; x++) {
+            for (int x = 0; x < sprite.getWidth(); x++) {
                 int xAbsolute = x + xPosition;
 
-                if (xAbsolute < -83 || xAbsolute >= screenWidth || yAbsolute < 0
+                if (xAbsolute < -sprite.getWidth() || xAbsolute >= screenWidth || yAbsolute < 0
                         || yAbsolute >= screenHeight)
                     break;
                 if (xAbsolute < 0)
                     xAbsolute = 0;
-                int col = sprite.pixels[x + y * 16];
+                int col = sprite.pixels[x + y * sprite.getWidth()];
                 if (col != 0x00000000)
                     screenBuffer[xAbsolute + yAbsolute * screenWidth] = col;
 
@@ -53,20 +53,25 @@ public class Renderer {
     public void renderTile(int xPosition, int yPosition, Tile tile) {
         xPosition -= camera.getxOffset();
         yPosition -= camera.getyOffset();
-        // System.out.println("X Offset: " + xOffset + " Y Offset:" + yOffset);
-        for (int y = 0; y < tile.sprite.SIZE; y++) {
+
+        Sprite sprite = tile.sprite;
+
+        for (int y = 0; y < sprite.getHeight(); y++) {
             int yAbsolute = y + yPosition;
-            for (int x = 0; x < tile.sprite.SIZE; x++) {
+
+            if (yAbsolute < 0 || yAbsolute >= screenHeight)
+                continue;
+
+            for (int x = 0; x < sprite.getWidth(); x++) {
                 int xAbsolute = x + xPosition;
 
-                if (xAbsolute < -tile.sprite.SIZE || xAbsolute >= screenWidth || yAbsolute < 0
-                        || yAbsolute >= screenHeight)
-                    break;
-                if (xAbsolute < 0)
-                    xAbsolute = 0;
+                if (xAbsolute < 0 || xAbsolute >= screenWidth)
+                    continue;
 
-                screenBuffer[xAbsolute + yAbsolute * screenWidth] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+                int index = x + y * sprite.getWidth();
+                int color = sprite.pixels[index];
 
+                screenBuffer[xAbsolute + yAbsolute * screenWidth] = color;
             }
         }
     }
