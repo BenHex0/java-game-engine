@@ -4,5 +4,8 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "d:\\Programming\\Learning\\Database\\java\\mysql-connector-j-9.5.0\\mysql-connector-j-9.5.0\\mysql-connector-j-9.5.0.jar"
-    ]
+    ],
+
+    "discord.lowerDetailsEditing": "2D Game in java",
+    "discord.lowerDetailsDebugging": "2D Game in java",
 }

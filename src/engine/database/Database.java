@@ -20,7 +20,7 @@ public class Database {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("✅ Database connected");
+            System.out.println("Database connected");
         } catch (Exception e) {
             e.printStackTrace();
         }
