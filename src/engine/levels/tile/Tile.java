@@ -1,12 +1,9 @@
 package engine.levels.tile;
 
 import engine.graphics.*;
-import engine.levels.tile.tiles.GrassInner;
-import engine.levels.tile.tiles.GrassWaterEdge;
-import engine.levels.tile.tiles.Hut;
-import engine.levels.tile.tiles.Tree;
-import engine.levels.tile.tiles.VoidTile;
-import engine.levels.tile.tiles.Water;
+import engine.levels.tile.tiles.*;
+
+
 
 public class Tile {
     public Sprite sprite;

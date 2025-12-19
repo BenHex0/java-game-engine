@@ -139,15 +139,15 @@ public class Level {
         if (tiles[x + y * worldWidth] == 0xff5a5a5a)
             return Tile.wall;
         
-        // walkable
+        // Walkable
         if (tiles[x + y * worldWidth] == 0xff67a55e)
             return Tile.grassFlat;
-        if (tiles[x + y * worldWidth] == 0xffd)
+        if (tiles[x + y * worldWidth] == 0xff5d9556)
             return Tile.grassDetail;
         if (tiles[x + y * worldWidth] == 0xff5a5a5a)
             return Tile.Dirt;
 
-        // Solid edges
+        // Solid edge
         if (tiles[x + y * worldWidth] == 0xff4e7e86)
             return Tile.grassWaterLeft;
         if (tiles[x + y * worldWidth] == 0xff387882)

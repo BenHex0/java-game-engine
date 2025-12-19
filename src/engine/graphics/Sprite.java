@@ -18,8 +18,8 @@ public class Sprite {
 
     /// *** world tiles last version *** ///
     //Exit
-    public static Sprite hole = new Sprite(16, 16, 2, 8, SpriteSheet.tiles);
     public static Sprite hut = new Sprite(16, 16,  0, 8, SpriteSheet.tiles);
+    public static Sprite hole = new Sprite(16, 16, 2, 8, SpriteSheet.tiles);
     
     // Solid
     public static Sprite tree0 = new Sprite(16, 16, 1, 0, SpriteSheet.tiles);

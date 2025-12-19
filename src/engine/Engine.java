@@ -8,7 +8,6 @@ import game.levels.*;
 import game.ui.DeathScreen;
 import game.ui.LevelFinished;
 import game.ui.MainMenu;
-
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
