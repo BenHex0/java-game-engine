@@ -15,7 +15,7 @@ public class Renderer {
         this.screenWidth = width;
         this.screenHeight = height;
         screenBuffer = new int[width * height];
-        frame = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_RGB);
+        frame = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         screenBuffer = ((DataBufferInt) frame.getRaster().getDataBuffer()).getData();
         camera = new Camera(width, height);
     }

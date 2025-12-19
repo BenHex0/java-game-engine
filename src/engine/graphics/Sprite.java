@@ -14,7 +14,7 @@ public class Sprite {
     // public static Sprite player = new Sprite(16, 16, 0, 0,
     // SpriteSheet.playerIdleSheet);
 
-    public static Sprite voidSprite = new Sprite(16, 16, 0X2784F5);
+    public static Sprite voidSprite = new Sprite(16, 16, 0x992784F5);
 
         /// *** world tiles last version *** ///
         //

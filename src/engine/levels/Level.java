@@ -60,6 +60,7 @@ public class Level {
 
     // override it
     public void currentLevelUpdate() {}
+    public void restartLevel() {}
 
     public void update() {
         if (!stop) {

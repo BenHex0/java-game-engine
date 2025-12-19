@@ -58,10 +58,6 @@ public class Level1 extends Level {
             database.close();
         }
 
-        if (player.die && input.isKeyPressed(InputHandler.Key.ENTER)) {
-            start();
-        }
-
         // System.out.println("player: " + player.getPviot().getX() / 16 + " " +
         // player.getPviot().getY() / 16);
         // System.out.println("end: " + end.getXInTile() + " " + end.getYInTile());
@@ -76,6 +72,11 @@ public class Level1 extends Level {
 
     }
 
+    @Override
+    public void restartLevel() {
+        start();
+    }
+
     boolean isColliding(Entity a, Entity b) {
         return a.getX() < b.getX() + b.getSprite().getWidth()
                 && a.getX() + a.getSprite().getWidth() > b.getX()
@@ -88,6 +89,10 @@ public class Level1 extends Level {
             System.out.println("Dead!");
             player.die = true;
             sound.stop();
+            if (timer % 120 == 0) {
+                Engine.setCurrentUI(2);
+                Engine.gameState = Engine.gamePause;
+            }
         }
     }
 
