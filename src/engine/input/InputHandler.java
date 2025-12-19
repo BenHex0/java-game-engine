@@ -13,7 +13,8 @@ public class InputHandler implements KeyListener {
         LEFT(KeyEvent.VK_A),
         RIGHT(KeyEvent.VK_D),
         JUMP(KeyEvent.VK_SPACE),
-        ESCAPE(KeyEvent.VK_ESCAPE);
+        ESCAPE(KeyEvent.VK_ESCAPE),
+        ENTER(KeyEvent.VK_ENTER);
 
         private final int keyCode;
 

@@ -15,6 +15,7 @@ public class Level {
     protected int worldWidth, worldHeight;
     protected int[] tilesInt;
     protected int[] tiles;
+    public boolean stop = false;
 
     protected InputHandler input;
 
@@ -61,11 +62,13 @@ public class Level {
     public void currentLevelUpdate() {}
 
     public void update() {
-        for (Entity e : entities) {
-            e.update();
+        if (!stop) {
+            for (Entity e : entities) {
+                e.update();
+            }
+    
+            currentLevelUpdate();
         }
-
-        currentLevelUpdate();
     }
 
     public void render(Renderer renderer) {
