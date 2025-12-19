@@ -3,6 +3,7 @@ package engine.graphics;
 import engine.utilities.Vector2i;
 
 public class Sprite {
+
     private int x, y;
     private int width, height;
     public final int SIZE;
@@ -18,21 +19,23 @@ public class Sprite {
 
     /// *** world tiles last version *** ///
     //Exit
-    public static Sprite hut = new Sprite(16, 16,  0, 8, SpriteSheet.tiles);
+    public static Sprite hut = new Sprite(16, 16, 0, 8, SpriteSheet.tiles);
     public static Sprite hole = new Sprite(16, 16, 2, 8, SpriteSheet.tiles);
-    
+    public static Sprite stairs0 = new Sprite(16, 16, 1, 9, SpriteSheet.tiles);
+    public static Sprite stairs1 = new Sprite(16, 16, 0, 9, SpriteSheet.tiles);
+
     // Solid
     public static Sprite tree0 = new Sprite(16, 16, 1, 0, SpriteSheet.tiles);
     public static Sprite tree1 = new Sprite(16, 16, 0, 0, SpriteSheet.tiles);
     public static Sprite water0 = new Sprite(16, 16, 0, 5, SpriteSheet.tiles);
     public static Sprite water1 = new Sprite(16, 16, 1, 5, SpriteSheet.tiles);
     public static Sprite wall = new Sprite(16, 16, 0, 6, SpriteSheet.tiles);
-    
+
     // Walkable
     public static Sprite grassFlat = new Sprite(16, 16, 1, 1, SpriteSheet.tiles);
     public static Sprite grassDetail = new Sprite(16, 16, 0, 1, SpriteSheet.tiles);
     public static Sprite Dirt = new Sprite(16, 16, 1, 6, SpriteSheet.tiles);
-    
+
     // Solid edge
     public static Sprite grassWaterLeft = new Sprite(16, 16, 0, 4, SpriteSheet.tiles);
     public static Sprite grassWaterRight = new Sprite(16, 16, 1, 4, SpriteSheet.tiles);
@@ -42,13 +45,6 @@ public class Sprite {
     public static Sprite grassWaterUpRight = new Sprite(16, 16, 5, 4, SpriteSheet.tiles);
     public static Sprite grassWaterDownLeft = new Sprite(16, 16, 6, 4, SpriteSheet.tiles);
     public static Sprite grassWaterDownRight = new Sprite(16, 16, 7, 4, SpriteSheet.tiles);
-    
-
-
-
-
-
-
 
     //world tiles
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -78,10 +74,11 @@ public class Sprite {
     ////////////////////////////////////////////////////////////////////////////////////////
 
     protected Sprite(SpriteSheet sheet, int width, int height) {
-        if (width == height)
-            SIZE = width;
-        else
+        if (width == height) {
+            SIZE = width; 
+        }else {
             SIZE = -1;
+        }
         this.width = width;
         this.height = height;
         this.sheet = sheet;
@@ -89,10 +86,11 @@ public class Sprite {
     }
 
     public Sprite(int[] pixels, int width, int height) {
-        if (width == height)
-            SIZE = width;
-        else
-        SIZE = -1;
+        if (width == height) {
+            SIZE = width; 
+        }else {
+            SIZE = -1;
+        }
         this.width = width;
         this.height = height;
         this.pixels = pixels;
