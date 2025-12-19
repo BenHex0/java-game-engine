@@ -16,17 +16,24 @@ public class Sprite {
 
     public static Sprite voidSprite = new Sprite(16, 16, 0x992784F5);
 
-        /// *** world tiles last version *** ///
-        //
+    /// *** world tiles last version *** ///
+    //Exit
+    public static Sprite hole = new Sprite(16, 16, 2, 8, SpriteSheet.tiles);
     public static Sprite hut = new Sprite(16, 16,  0, 8, SpriteSheet.tiles);
+    
+    // Solid
+    public static Sprite tree0 = new Sprite(16, 16, 1, 0, SpriteSheet.tiles);
+    public static Sprite tree1 = new Sprite(16, 16, 0, 0, SpriteSheet.tiles);
     public static Sprite water0 = new Sprite(16, 16, 0, 5, SpriteSheet.tiles);
     public static Sprite water1 = new Sprite(16, 16, 1, 5, SpriteSheet.tiles);
-    public static Sprite tree0 = new Sprite(16, 16, 0, 0, SpriteSheet.tiles);
-    public static Sprite tree1 = new Sprite(16, 16, 1, 0, SpriteSheet.tiles);
-    // Grass
-    public static Sprite grassFlat = new Sprite(16, 16, 0, 1, SpriteSheet.tiles);
-    public static Sprite grassDetail = new Sprite(16, 16, 1, 1, SpriteSheet.tiles);
-    // Water edge
+    public static Sprite wall = new Sprite(16, 16, 0, 6, SpriteSheet.tiles);
+    
+    // Walkable
+    public static Sprite grassFlat = new Sprite(16, 16, 1, 1, SpriteSheet.tiles);
+    public static Sprite grassDetail = new Sprite(16, 16, 0, 1, SpriteSheet.tiles);
+    public static Sprite Dirt = new Sprite(16, 16, 1, 6, SpriteSheet.tiles);
+    
+    // Solid edge
     public static Sprite grassWaterLeft = new Sprite(16, 16, 0, 4, SpriteSheet.tiles);
     public static Sprite grassWaterRight = new Sprite(16, 16, 1, 4, SpriteSheet.tiles);
     public static Sprite grassWaterUp = new Sprite(16, 16, 3, 4, SpriteSheet.tiles);
@@ -36,6 +43,8 @@ public class Sprite {
     public static Sprite grassWaterDownLeft = new Sprite(16, 16, 6, 4, SpriteSheet.tiles);
     public static Sprite grassWaterDownRight = new Sprite(16, 16, 7, 4, SpriteSheet.tiles);
     
+
+
 
 
 

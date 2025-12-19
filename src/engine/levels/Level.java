@@ -121,8 +121,13 @@ public class Level {
     public Tile getTile(int x, int y) {
         if (x < 0 || y < 0 || x >= worldWidth || y >= worldHeight)
             return Tile.voidTile;
+        // Exit
         if (tiles[x + y * worldWidth] == 0xffff0000)
             return Tile.hut;
+        if (tiles[x + y * worldWidth] == 0xff000000)
+            return Tile.hole;
+
+        // Solid 
         if (tiles[x + y * worldWidth] == 0xff2784f5)
             return Tile.water0;
         if (tiles[x + y * worldWidth] == 0xff6fb2e1)
@@ -131,10 +136,18 @@ public class Level {
             return Tile.tree0;
         if (tiles[x + y * worldWidth] == 0xff56483d)
             return Tile.tree1;
+        if (tiles[x + y * worldWidth] == 0xff5a5a5a)
+            return Tile.wall;
+        
+        // walkable
         if (tiles[x + y * worldWidth] == 0xff67a55e)
             return Tile.grassFlat;
-        if (tiles[x + y * worldWidth] == 0xff5d9556)
+        if (tiles[x + y * worldWidth] == 0xffd)
             return Tile.grassDetail;
+        if (tiles[x + y * worldWidth] == 0xff5a5a5a)
+            return Tile.Dirt;
+
+        // Solid edges
         if (tiles[x + y * worldWidth] == 0xff4e7e86)
             return Tile.grassWaterLeft;
         if (tiles[x + y * worldWidth] == 0xff387882)
