@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import engine.entities.Entity;
 import engine.graphics.*;
 import engine.input.InputHandler;
-import engine.levels.tiles.*;
+import engine.levels.tile.*;
 
 public class Level {
     protected int worldWidth, worldHeight;

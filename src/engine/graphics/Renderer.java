@@ -2,8 +2,7 @@ package engine.graphics;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-
-import engine.levels.tiles.*;
+import engine.levels.tile.*;
 
 public class Renderer {
     public int screenWidth, screenHeight;

@@ -3,10 +3,11 @@ package engine;
 import engine.graphics.Renderer;
 import engine.input.InputHandler;
 import engine.levels.*;
-import engine.ui.DeathScreen;
-import engine.ui.MainMenu;
 import engine.ui.UI;
 import game.levels.*;
+import game.ui.DeathScreen;
+import game.ui.MainMenu;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
@@ -136,6 +137,7 @@ public class Engine extends Canvas implements Runnable {
         } else if (gameState == endGame) {
             currentUI.update();
         }
+        inputHandler.update();
     }
 
     public void render() {
