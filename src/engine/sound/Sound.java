@@ -1,7 +1,7 @@
 package engine.sound;
 
-import javax.sound.sampled.*;
 import java.io.File;
+import javax.sound.sampled.*;
 
 public class Sound {
     Clip clip;

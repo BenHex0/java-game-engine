@@ -1,12 +1,12 @@
 package game.levels;
 
+import engine.Engine;
 import engine.database.Database;
 import engine.entities.Entity;
 import engine.input.InputHandler;
 import engine.levels.Level;
 import engine.sound.Sound;
 import engine.utilities.TileCoordinate;
-import engine.Engine;
 import game.entities.*;
 
 public class Level2 extends Level {
@@ -32,7 +32,7 @@ public class Level2 extends Level {
     void start() {
         deleteAllEntities();
         sound = new Sound();
-        TileCoordinate playerPosition = new TileCoordinate(176, 169);
+        TileCoordinate playerPosition = new TileCoordinate(15, 16);
         player = new Player(playerPosition.x(), playerPosition.y(), input);
         TileCoordinate enemyPosition = new TileCoordinate(10, 8);
         enemy = new Enemy(enemyPosition.x(), enemyPosition.y());
@@ -67,7 +67,7 @@ public class Level2 extends Level {
         }
 
         if (player.getPviot().getX() / 16 == end.getXInTile() && player.getPviot().getY() / 16 == end.getYInTile()) {
-            database.saveScore(50);
+            // database.saveScore(50);
             database.close();
             stop = true;
             System.out.println("win!");

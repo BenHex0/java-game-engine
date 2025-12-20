@@ -1,26 +1,24 @@
 package game.ui;
 
+import engine.Engine;
+import engine.input.InputHandler;
+import engine.ui.UI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-import engine.Engine;
-import engine.database.Database;
-import engine.input.InputHandler;
-import engine.ui.UI;
-
 public class ScoreUI extends UI {
 
-    Database database;
+    // Database database;
 
     public ScoreUI(int screenWidth, int screenHeight, InputHandler input) {
         super(screenWidth, screenHeight, input);
-        database = new Database();
+        // database = new Database();
     }
 
-    int getScores() {
-        return database.getTotalScore();
-    }
+    // int getScores() {
+    //     return database.getTotalScore();
+    // }
 
     @Override
     public void update() {
@@ -46,7 +44,7 @@ public class ScoreUI extends UI {
         g.setFont(new Font("Monospaced", Font.BOLD, 24));
         int startY = 150;
         g.setColor(new Color(200, 200, 80));
-        drawCenteredString(g, String.valueOf(getScores()), screenWidth, startY);
+        // drawCenteredString(g, String.valueOf(getScores()), screenWidth, startY);
 
 
         // Footer

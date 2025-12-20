@@ -12,18 +12,24 @@ public class Tile {
     // Exit
     public static Tile hut = new Exit(Sprite.hut);
     public static Tile hole = new Exit(Sprite.hole);
-
+    public static Tile stairs0 = new Exit(Sprite.stairs0);
+    public static Tile stairs1 = new Exit(Sprite.stairs1);
+        // stairs2, stairs3 are wakable
+    public static Tile boat = new Exit(Sprite.boat);
+    
     // Solid
     public static Tile water0 = new Water(Sprite.water0);
     public static Tile water1 = new Water(Sprite.water1);
     public static Tile tree0 = new Solid(Sprite.tree0);
     public static Tile tree1 = new Solid(Sprite.tree1);
     public static Tile wall = new Solid(Sprite.wall);
-
+    
     // Walkable
     public static Tile grassFlat = new Walkable(Sprite.grassFlat);
     public static Tile grassDetail = new Walkable(Sprite.grassDetail);
     public static Tile Dirt = new Walkable(Sprite.Dirt);
+    public static Tile stairs2 = new Walkable(Sprite.stairs2);
+    public static Tile stairs3 = new Walkable(Sprite.stairs3);
 
     // Solid edge
     public static Tile grassWaterLeft = new GrassWaterEdge(Sprite.grassWaterLeft);

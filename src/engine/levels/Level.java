@@ -126,6 +126,12 @@ public class Level {
             return Tile.hut;
         if (tiles[x + y * worldWidth] == 0xff000000)
             return Tile.hole;
+        if (tiles[x + y * worldWidth] == 0xffd77bba)
+            return Tile.stairs0;
+        if (tiles[x + y * worldWidth] == 0xff76428a)
+            return Tile.stairs1;        
+        if (tiles[x + y * worldWidth] == 0xffeec39a)
+            return Tile.boat;
 
         // Solid 
         if (tiles[x + y * worldWidth] == 0xff2784f5)
@@ -144,8 +150,12 @@ public class Level {
             return Tile.grassFlat;
         if (tiles[x + y * worldWidth] == 0xff5d9556)
             return Tile.grassDetail;
-        if (tiles[x + y * worldWidth] == 0xff5a5a5a)
+        if (tiles[x + y * worldWidth] == 0xff7f583b)
             return Tile.Dirt;
+        if (tiles[x + y * worldWidth] == 0xffd95763)
+            return Tile.stairs2;
+        if (tiles[x + y * worldWidth] == 0xfffbf236)
+            return Tile.stairs3;
 
         // Solid edge
         if (tiles[x + y * worldWidth] == 0xff4e7e86)

@@ -1,12 +1,12 @@
 package game.levels;
 
+import engine.Engine;
 import engine.database.Database;
 import engine.entities.Entity;
 import engine.input.InputHandler;
 import engine.levels.Level;
 import engine.sound.Sound;
 import engine.utilities.TileCoordinate;
-import engine.Engine;
 import game.entities.*;
 
 public class Level3 extends Level {
@@ -67,7 +67,7 @@ public class Level3 extends Level {
         }
 
         if (player.getPviot().getX() / 16 == end.getXInTile() && player.getPviot().getY() / 16 == end.getYInTile()) {
-            database.saveScore(50);
+            // database.saveScore(50);
             database.close();
             stop = true;
             System.out.println("win!");

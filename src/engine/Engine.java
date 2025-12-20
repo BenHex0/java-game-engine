@@ -9,7 +9,6 @@ import game.ui.DeathScreen;
 import game.ui.LevelFinished;
 import game.ui.MainMenu;
 import game.ui.ScoreUI;
-
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
@@ -35,6 +34,9 @@ public class Engine extends Canvas implements Runnable {
     public static int level1 = 1;
     public static int level2 = 2;
     public static int level3 = 3;
+    public static int level4 = 4;
+    public static int level5 = 5;
+    public static int level6 = 6;
 
     // Levels
     public static Level currentLevel;
@@ -62,11 +64,17 @@ public class Engine extends Canvas implements Runnable {
 
     public static void setCurrentLevel(int level) {
         if (level == 1) {
-            currentLevel = new Level1("assets/world/MapWaterEdge.png", inputHandler);
+            currentLevel = new Level01("assets/world/Map01-Forest.png", inputHandler);
         } else if (level == 2) {
-            currentLevel = new Level2("assets/world/MapWaterEdgeBig.png", inputHandler);
+            currentLevel = new Level02("assets/world/Map02-Dun.png", inputHandler);
         } else if (level == 3) {
-            currentLevel = new Level3("assets/world/MapWaterHard200.png", inputHandler);
+            currentLevel = new Level03("assets/world/Map03-Dun.png", inputHandler);
+        } else if (level == 4) {
+            currentLevel = new Level04("assets/world/Map04-island.png", inputHandler);
+        } else if (level == 5) {
+            currentLevel = new Level05("assets/world/Map05-island.png", inputHandler);
+        } else if (level == 6) {
+            currentLevel = new Level06("assets/world/Map06-island.png", inputHandler);
         }
     }
 
