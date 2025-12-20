@@ -6,17 +6,23 @@ import java.util.Comparator;
 import java.util.List;
 
 import engine.entities.Entity;
+import engine.graphics.Animation;
 import engine.graphics.Renderer;
 import engine.graphics.Sprite;
+import engine.graphics.SpriteSheet;
 import engine.levels.tile.Tile;
 import engine.utilities.Node;
 import engine.utilities.Vector2i;
 
-
 public class Enemy extends Entity {
+
     private int xAxis, yAxis;
-    private int animate = 0;
     private boolean walking = true;
+    private Animation anim_down = new Animation(SpriteSheet.playerAnimDown, 16, 16, 2);
+    private Animation anim_up = new Animation(SpriteSheet.playerAnimUp, 16, 16, 2);
+    private Animation anim_left = new Animation(SpriteSheet.playerAnimLeft, 16, 16, 2);
+    private Animation anim_right = new Animation(SpriteSheet.playerAnimRight, 16, 16, 2);
+    private Animation anim = anim_down;
     private Entity target;
     private List<Node> path = null;
     private int nextPos;
@@ -34,7 +40,9 @@ public class Enemy extends Entity {
     public void update() {
         xAxis = 0;
         yAxis = 0;
+
         pathFindingMove();
+        animation();
 
         if (path != null) {
             debugPath.clear();
@@ -46,7 +54,6 @@ public class Enemy extends Entity {
         }
     }
 
-
     public void target(Entity target) {
         this.target = target;
     }
@@ -57,8 +64,6 @@ public class Enemy extends Entity {
     private void pathFindingMove() {
         X = getPviot().getX();
         Y = getPviot().getY();
-        xAxis = 0;
-        yAxis = 0;
 
         // Vector2i startTile = new Vector2i(getPivot().getX() >> 4, getPivot().getY()
         // >> 4);
@@ -75,7 +80,6 @@ public class Enemy extends Entity {
                 path = findPath(startTile, destinationTile);
 
                 if (path != null && !path.isEmpty()) {
-                    // FIX 1: Initialize to the *first* node in the path (index 0)
                     nextPos = path.size() - 1;
                 } else {
                     path = null;
@@ -100,46 +104,46 @@ public class Enemy extends Entity {
                 double nx = dx / distance;
                 double ny = dy / distance;
 
-                x += nx * speed;
-                y += ny * speed;
+                // --- Direction (axis) ---
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    xAxis = dx > 0 ? 1 : -1;
+                } else {
+                    yAxis = dy > 0 ? 1 : -1;
+                }
+
+                // --- Movement ---
+                double stepX = nx * speed;
+                double stepY = ny * speed;
+
+                if (!collision(stepX, 0)) {
+                    x += stepX;
+                }
+
+                if (!collision(0, stepY)) {
+                    y += stepY;
+                }
+
             }
 
-            if (distance <= speed) {
-                x += dx;
-                y += dy;
-                nextPos--;
-            }
-
-            if (nextPos < 0) {
-                path = null;
-                walking = false;
-                return;
-            }
         } else if (path != null) {
             // Path exists but nextPos is out of bounds (path finished)
             path = null;
         }
-    }
 
-    void move(int xAxis, int yAxis, double speed) {
-
-        if (xAxis > 0)
+        if (xAxis > 0) {
             dir = Direction.RIGHT;
-        else if (xAxis < 0)
+            walking = true;
+        } else if (xAxis < 0) {
             dir = Direction.LEFT;
-        else if (yAxis > 0)
+            walking = true;
+        } else if (yAxis > 0) {
             dir = Direction.DOWN;
-        else if (yAxis < 0)
+            walking = true;
+        } else if (yAxis < 0) {
             dir = Direction.UP;
-
-        // Move X
-        if (xAxis != 0) {
-            x += Math.signum(xAxis) * speed;
-        }
-
-        // Move Y
-        if (yAxis != 0) {
-            y += (Math.signum(yAxis) * speed);
+            walking = true;
+        } else {
+            walking = false;
         }
     }
 
@@ -200,14 +204,14 @@ public class Enemy extends Entity {
                 int yi = (i / 3) - 1; // Neighbor Y offset
 
                 Vector2i neighborCoords = new Vector2i(currentX + xi, currentY + yi);
-                
+
                 Tile at = level.getTile(neighborCoords.getX(), neighborCoords.getY());
 
                 if (at == null || at.solid() || at == Tile.voidTile)
                     continue; // Cannot move here
 
                 // Calculate costs for the path *through* the current node to the neighbor
-                double tentativeGCost = current.gCost + getDistance(current.tile, neighborCoords);
+                double tentativeGCost = current.gCost + getDistance(current.tile, neighborCoords)  == 1 ? 1 : .95;;
                 double hCost = getDistance(neighborCoords, end);
 
                 // Check if this neighbor is already processed (closed list)
@@ -267,8 +271,29 @@ public class Enemy extends Entity {
         return null;
     }
 
+    void animation() {
+
+        if (walking) {
+            anim.update();
+        } else {
+            anim.resetAnimation();
+        }
+
+        if (dir == Direction.DOWN) {
+            anim = anim_down;
+        } else if (dir == Direction.UP) {
+            anim = anim_up;
+        } else if (dir == Direction.LEFT) {
+            anim = anim_left;
+        } else if (dir == Direction.RIGHT) {
+            anim = anim_right;
+        }
+    }
+
     @Override
     public void render(Renderer renderer) {
+        sprite = anim.getSprite();
+        renderer.camera.cameraTarget(x, y, sprite.getWidth(), sprite.getHeight());
         int drawX = (int) Math.round(x - renderer.camera.getxOffset());
         int drawY = (int) Math.round(y - renderer.camera.getyOffset());
         renderer.renderSprite(drawX, drawY, sprite, false);

@@ -14,6 +14,10 @@ public class Player extends Entity {
     private Sound soundEffect;
     private int xAxis, yAxis;
     private Animation anim_down = new Animation(SpriteSheet.playerAnimDown, 16, 16, 2);
+    private Animation anim_up = new Animation(SpriteSheet.playerAnimUp, 16, 16, 2);
+    private Animation anim_left = new Animation(SpriteSheet.playerAnimLeft, 16, 16, 2);
+    private Animation anim_right = new Animation(SpriteSheet.playerAnimRight, 16, 16, 2);
+    private Animation anim = anim_down;
     private boolean walking = false;
     private double speed = 3.5;
     private boolean once = true;
@@ -31,13 +35,9 @@ public class Player extends Entity {
     public void update() {
         xAxis = 0;
         yAxis = 0;
-
         if (!die) {
             control();
-
-            if (walking) {
-                anim_down.update();
-            }
+            animation();
             move(xAxis, yAxis, speed);
         } else if (once) {
             soundEffect.play();
@@ -77,10 +77,10 @@ public class Player extends Entity {
         } else if (xAxis < 0) {
             dir = Direction.LEFT;
             walking = true;
-        } else if (yAxis > 0) {
+        } else if (yAxis < 0) {
             dir = Direction.DOWN;
             walking = true;
-        } else if (yAxis < 0) {
+        } else if (yAxis > 0) {
             dir = Direction.UP;
             walking = true;
         } else {
@@ -104,11 +104,30 @@ public class Player extends Entity {
         }
     }
 
+    void animation() {
+
+        if (walking) {
+            anim.update();
+        } else {
+            anim.resetAnimation();
+        }
+
+        if (dir == Direction.DOWN) {
+            anim = anim_down;
+        } else if (dir == Direction.UP) {
+            anim = anim_up;
+        } else if (dir == Direction.LEFT) {
+            anim = anim_left;
+        } else if (dir == Direction.RIGHT) {
+            anim = anim_right;
+        }
+    }
+
     @Override
     public void render(Renderer renderer) {
         if (!die) {
-            sprite = anim_down.getSprite();
-            renderer.camera.cameraTarget(x, y, sprite.getWidth(), sprite.getHeight());
+            sprite = anim.getSprite();
+            // renderer.camera.cameraTarget(x, y, sprite.getWidth(), sprite.getHeight());
             int drawX = (int) Math.round(x - renderer.camera.getxOffset());
             int drawY = (int) Math.round(y - renderer.camera.getyOffset());
             renderer.renderSprite(drawX, drawY, sprite, false);
