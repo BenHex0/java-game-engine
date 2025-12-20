@@ -32,9 +32,9 @@ public class Level1 extends Level {
     void start() {
         deleteAllEntities();
         sound = new Sound();
-        TileCoordinate playerPosition = new TileCoordinate(10, 10);
+        TileCoordinate playerPosition = new TileCoordinate(70, 67);
         player = new Player(playerPosition.x(), playerPosition.y(), input);
-        TileCoordinate enemyPosition = new TileCoordinate(5, 5);
+        TileCoordinate enemyPosition = new TileCoordinate(5, 6);
         enemy = new Enemy(enemyPosition.x(), enemyPosition.y());
         database = new Database();
         add(player);
