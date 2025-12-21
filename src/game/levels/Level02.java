@@ -43,7 +43,7 @@ public class Level02 extends Level {
         add(enemy);
         enemy.target(player);
         end = new TileCoordinate(59, 72);
-        sound.setFile(0);
+        sound.setFile(3);
         enmeySound.setFile(2);
         enmeySound.changeVolume(3);
     }
