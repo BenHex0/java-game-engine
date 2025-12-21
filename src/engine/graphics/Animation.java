@@ -14,7 +14,7 @@ public class Animation extends Sprite {
         super(sheet, width, height);
         this.length = length;
 
-        sprite = sheet.getSprites()[0]; // immediate draw
+        sprite = sheet.getSprites()[0];
 
         if (length > sheet.getSprites().length) {
             System.err.println("Error! length of animation is too long");

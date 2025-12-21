@@ -90,7 +90,7 @@ public class Level06 extends Level {
                 doOnce = false;
             }
             if (timer % 120 == 0) {
-                Engine.setCurrentUI(3);
+                Engine.setCurrentUI(Engine.deathScreen);
                 Engine.current_state = Engine.gamePause_state;
             }
         }
@@ -104,7 +104,7 @@ public class Level06 extends Level {
             Engine.current_state = Engine.ui_state;
             sound.stop();
             enmeySound.stop();
-            Engine.setCurrentUI(Engine.winScreen);
+            Engine.setCurrentUI(Engine.endScreen);
         }
 
     }

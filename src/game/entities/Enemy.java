@@ -20,10 +20,10 @@ public class Enemy extends Entity {
     private Entity target;
     private List<Node> path = null;
     private int nextPos; // Index of the node we are currently walking toward
-    private double speed = 2.5; // Slightly lower speed often helps path following
+    private double speed = 2.5;
     private int time = 0;
 
-    private List<Vector2i> debugPath = new ArrayList<>();
+    // private List<Vector2i> debugPath = new ArrayList<>();
 
     public Enemy(double x, double y) {
         this.x = x;
@@ -45,12 +45,12 @@ public class Enemy extends Entity {
         animation();
 
         // Debug visualization
-        if (path != null) {
-            debugPath.clear();
-            for (Node n : path) {
-                debugPath.add(new Vector2i((n.tile.getX() << 4) + 8, (n.tile.getY() << 4) + 8));
-            }
-        }
+        // if (path != null) {
+        //     debugPath.clear();
+        //     for (Node n : path) {
+        //         debugPath.add(new Vector2i((n.tile.getX() << 4) + 8, (n.tile.getY() << 4) + 8));
+        //     }
+        // }
     }
 
     int X;
@@ -68,7 +68,6 @@ public class Enemy extends Entity {
 
         // --- (1. Pathfinding Initiation) ---
         if (time % 15 == 0 || true) {
-            // Use the commented out tile coordinate calculation
             if (!startTile.equals(destinationTile)) {
                 path = findPath(startTile, destinationTile);
                 if (path != null && !path.isEmpty()) {
@@ -82,7 +81,7 @@ public class Enemy extends Entity {
         }
 
         // --- (2. Path Following Logic) ---
-        if (path != null) { // Check if path exists and we haven't reached the end
+        if (path != null) { 
 
             Vector2i targetTile = path.get(nextPos).tile;
             // Calculate the target pixel coordinates (tile * 16)
@@ -113,7 +112,6 @@ public class Enemy extends Entity {
                 }
             }
         } else if (path != null) {
-            // Path exists but nextPos is out of bounds (path finished)
             path = null;
         }
 
@@ -229,8 +227,9 @@ public class Enemy extends Entity {
         int drawY = (int) Math.round(y - renderer.camera.getyOffset());
         renderer.renderSprite(drawX, drawY, sprite, false);
 
-        for (int i = 0; i < debugPath.size(); i++) {
-            renderer.renderPixel(debugPath.get(i).getX(), debugPath.get(i).getY(), 0xfffff000);
-        }
+        // print the path for debugging
+        // for (int i = 0; i < debugPath.size(); i++) {
+        //     renderer.renderPixel(debugPath.get(i).getX(), debugPath.get(i).getY(), 0xfffff000);
+        // }
     }
 }

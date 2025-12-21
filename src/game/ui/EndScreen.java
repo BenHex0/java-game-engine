@@ -1,36 +1,38 @@
 package game.ui;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Graphics;
 
 import engine.input.InputHandler;
 import engine.ui.UI;
-import engine.Engine;
 
-public class DeathScreen extends UI {
+public class EndScreen extends UI {
 
-    public DeathScreen(int screenWidth, int screenHeight, InputHandler input) {
+    public EndScreen(int screenWidth, int screenHeight, InputHandler input) {
         super(screenWidth, screenHeight, input);
     }
 
     @Override
     public void update() {
         if (input.isKeyPressed(InputHandler.Key.ENTER)) {
-            Engine.currentLevel.restartLevel();
-            Engine.current_state = Engine.gameplay_state;
+            System.exit(0);
         }
     }
 
     @Override
     public void render(Graphics g) {
 
-        String text = "DEAD";
+        String text = "You Escaped from the Monster!";
+
+        // Background
+        g.setColor(new Color(25, 25, 35));
+        g.fillRect(0, 0, screenWidth, screenHeight);
 
         // ---- Dynamic font sizing ----
         int maxTextWidth = (int) (screenWidth * 0.9);
-        int fontSize = screenHeight / 4; 
+        int fontSize = screenHeight / 4;
 
         Font font;
         FontMetrics fm;
@@ -42,26 +44,26 @@ public class DeathScreen extends UI {
             fontSize--;
         } while (fm.stringWidth(text) > maxTextWidth && fontSize > 12);
 
-        // Background
-        g.setColor(new Color(25, 25, 35));
-        g.fillRect(0, 0, screenWidth, screenHeight);
+        g.setColor(Color.GREEN);
 
-        // Font
-        g.setFont(font);
-        g.setColor(Color.RED);
-
+        // Measure text
         int textWidth = fm.stringWidth(text);
         int textHeight = fm.getHeight();
 
-        // Center position
+        // Center text
         int x = (screenWidth - textWidth) / 2;
         int y = (screenHeight - textHeight) / 2 + fm.getAscent();
+
         g.drawString(text, x, y);
 
-        g.setFont(new Font("Serif", Font.ITALIC, 16));
+        
+        Font hintFont = new Font("Serif", Font.ITALIC, 16);
+        g.setFont(hintFont);
         g.setColor(new Color(200, 200, 200));
-        String hint = "Press Enter to restart";
+
+        String hint = "Press Enter";
         int hx = (screenWidth - g.getFontMetrics().stringWidth(hint)) / 2;
+
         g.drawString(hint, hx, screenHeight - 50);
     }
 

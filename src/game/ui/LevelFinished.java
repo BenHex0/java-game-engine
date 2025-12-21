@@ -26,19 +26,28 @@ public class LevelFinished extends UI {
     public void render(Graphics g) {
 
         String text = "You Win";
-        int fontSize = 100;
+        // ---- Dynamic font sizing ----
+        int maxTextWidth = (int) (screenWidth * 0.9);
+        int fontSize = screenHeight / 4;
+
+        Font font;
+        FontMetrics fm;
+
+        do {
+            font = new Font("Arial", Font.BOLD, fontSize);
+            g.setFont(font);
+            fm = g.getFontMetrics();
+            fontSize--;
+        } while (fm.stringWidth(text) > maxTextWidth && fontSize > 12);
 
         // Background
         g.setColor(new Color(25, 25, 35));
         g.fillRect(0, 0, screenWidth, screenHeight);
 
         // Font
-        Font font = new Font("Arial", Font.BOLD, fontSize);
         g.setFont(font);
         g.setColor(Color.CYAN);
 
-        // Measure text
-        FontMetrics fm = g.getFontMetrics();
 
         int textWidth = fm.stringWidth(text);
         int textHeight = fm.getHeight();
