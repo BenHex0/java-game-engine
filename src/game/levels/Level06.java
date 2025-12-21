@@ -35,15 +35,15 @@ public class Level06 extends Level {
         deleteAllEntities();
         sound = new Sound();
         enmeySound = new Sound();
-        TileCoordinate playerPosition = new TileCoordinate(22, 25);
+        TileCoordinate playerPosition = new TileCoordinate(15, 63);
         player = new Player(playerPosition.x(), playerPosition.y(), input);
-        TileCoordinate enemyPosition = new TileCoordinate(18, 17);
+        TileCoordinate enemyPosition = new TileCoordinate(1, 63);
         enemy = new Enemy(enemyPosition.x(), enemyPosition.y());
         database = new Database();
         add(player);
         add(enemy);
         enemy.target(player);
-        end = new TileCoordinate(69, 63);
+        end = new TileCoordinate(250, 80);
         sound.setFile(0);
         enmeySound.setFile(2);
         enmeySound.changeVolume(3);
@@ -105,7 +105,6 @@ public class Level06 extends Level {
             sound.stop();
             enmeySound.stop();
             Engine.setCurrentUI(Engine.winScreen);
-            Engine.setCurrentLevel(Engine.level2);
         }
 
     }

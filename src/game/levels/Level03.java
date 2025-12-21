@@ -35,15 +35,15 @@ public class Level03 extends Level {
         deleteAllEntities();
         sound = new Sound();
         enmeySound = new Sound();
-        TileCoordinate playerPosition = new TileCoordinate(22, 25);
+        TileCoordinate playerPosition = new TileCoordinate(7, 15);
         player = new Player(playerPosition.x(), playerPosition.y(), input);
-        TileCoordinate enemyPosition = new TileCoordinate(18, 17);
+        TileCoordinate enemyPosition = new TileCoordinate(6, 8);
         enemy = new Enemy(enemyPosition.x(), enemyPosition.y());
         database = new Database();
         add(player);
         add(enemy);
         enemy.target(player);
-        end = new TileCoordinate(69, 63);
+        end = new TileCoordinate(43, 37);
         sound.setFile(0);
         enmeySound.setFile(2);
         enmeySound.changeVolume(3);
