@@ -6,6 +6,7 @@ import engine.levels.*;
 import engine.ui.UI;
 import game.levels.*;
 import game.ui.DeathScreen;
+import game.ui.EndScreen;
 import game.ui.LevelFinished;
 import game.ui.MainMenu;
 import game.ui.ScoreUI;
@@ -44,6 +45,7 @@ public class Engine extends Canvas implements Runnable {
     public static int scoreScreen = 2;
     public static int deathScreen = 3;
     public static int winScreen = 4;
+    public static int endScreen = 5;
 
     // GAME STATES
     public static int current_state = 0;
@@ -87,6 +89,8 @@ public class Engine extends Canvas implements Runnable {
             currentUI = new DeathScreen(screenWidth * scale, screenHeight * scale, inputHandler);
         } else if (ui == 4) {
             currentUI = new LevelFinished(screenWidth * scale, screenHeight * scale, inputHandler);
+        } else if (ui == 5) {
+            currentUI = new EndScreen(screenWidth * scale, screenHeight * scale, inputHandler);
         }
     }
 
